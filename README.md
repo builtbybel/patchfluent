@@ -1,9 +1,9 @@
 
 <h1 align="center">
   <br>
-  <a href="http://www.builtbybel.com"><img src="https://github.com/builtbybel/bloatbox/blob/master/src/Patchlady/patchlady.ico" alt="Bloatbox" width="200"></a>
+  <a href="http://www.builtbybel.com"><img src="https://github.com/builtbybel/patchlady/blob/master/src/Patchlady/patchlady.ico" alt="Patchlady" width="200"></a>
   <br>
-  Bloatbox
+  Patchlady
   <br>
 </h1>
 
