@@ -7,7 +7,7 @@
   <br>
 </h1>
 
-<h3 align="center">🦄 Manual Windows 10 updates installer</h3>
+<h3 align="center">🦄 Don't let Windows 10 Update to sabotage you at work/h3>
 
 <p align="center">
 <a href="https://github.com/builtbybel/patchlady/releases/latest" target="_blank">
