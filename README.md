@@ -7,7 +7,7 @@
   <br>
 </h1>
 
-<h3 align="center">☑️ Manual Windows 10 updates installer</h3>
+<h3 align="center">🦄 Manual Windows 10 updates installer</h3>
 
 <p align="center">
 <a href="https://github.com/builtbybel/patchlady/releases/latest" target="_blank">
@@ -29,6 +29,7 @@ alt="GitHub issues">
 
 <p align="center">
   <a href="#about">About</a> •
+  <a href="#about">How-to</a> •
   <a href="#download">Download</a> •
   <a href="#credits">Credits</a>
 </p>
@@ -37,9 +38,29 @@ alt="GitHub issues">
 
 ## About
 
-I found by chance this cool project from [slavanap](https://github.com/slavanap) called **[Windows10ManualUpdate](https://github.com/slavanap/Windows10ManualUpdate)** a few weeks ago and decided to take a closer look at it. Finally i managed to have a first look at it today and created a 1:1 fork. First i took care of the name and named it **Patchlady**. As an alternative I had PatchPal in mind, but didn't want any trouble with Elon "PayPal" Musk ;).
+I found by chance this cool project from [slavanap](https://github.com/slavanap) called **[Windows10ManualUpdate](https://github.com/slavanap/Windows10ManualUpdate)** a few weeks ago and decided to take a closer look at it. Finally i managed to have a first look at it today and created a 1:1 fork. First I took care of the name and named it **Patchlady**. As an alternative I had PatchPal in mind, but didn't want any trouble with Elon "PayPal" Musk ;).
 
 You are welcome to take a closer look at it and support slavanaps project or this fork. I would be very sorry if the project goes under. It has definitely had to be better valued.
+
+## How-to
+
+Note, this method may not work properly in Windows 10 Home.
+
+Before running this app you must turn off automatic updates installation. This could be done via Group Policy Object Editor MMC snap-in or via importing registry files into Windows Registry.
+
+In order to do it via MMC:
+
+Press Win+R. Type mmc.exe. Hit Enter.
+Navigate menu File -> Add/Remove Snap-in. Select Group Policy Object Editor, click Add to add it to the list on the right. Click Finish, then OK.
+On the left navigate to Local Computer Policy -> Computer Configuration -> Administrative Templates -> Windows Components -> Windows Update. Select that folder.
+In the list select Configure Automatic Updates policy and set it to Disabled. This setting will disable automatic updates check and installation, but if you navigate to Updates in Windows Setting you'll implicitly launch automatic updates check and installation.
+Change other options in MMC, if you really know what you're doing.
+
+Another approach is to the Registry files:
+
+[Disable automatic updates policy.reg](https://github.com/builtbybel/patchlady/raw/master/src/Patchlady/Disable%20automatic%20updates%20policy.reg)
+[Disable automatic updates & no restarts policies.reg](https://github.com/builtbybel/patchlady/raw/master/src/Patchlady/Disable%20automatic%20updates%20%26%20no%20restarts%20policies.reg)manual updates policy.reg
+
 
 ## Download
 
