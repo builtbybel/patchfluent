@@ -50,11 +50,11 @@ Note, this method may not work properly in Windows 10 Home.
 
 In order to do it via MMC:
 
-Press Win+R. Type mmc.exe. Hit Enter.
-Navigate menu File -> Add/Remove Snap-in. Select Group Policy Object Editor, click Add to add it to the list on the right. Click Finish, then OK.
-On the left navigate to Local Computer Policy -> Computer Configuration -> Administrative Templates -> Windows Components -> Windows Update. Select that folder.
-In the list select Configure Automatic Updates policy and set it to Disabled. This setting will disable automatic updates check and installation, but if you navigate to Updates in Windows Setting you'll implicitly launch automatic updates check and installation.
-Change other options in MMC, if you really know what you're doing.
+- Press Win+R. Type mmc.exe. Hit Enter.
+- Navigate menu File -> Add/Remove Snap-in. Select Group Policy Object Editor, click Add to add it to the list on the right. Click Finish, then OK.
+- On the left navigate to Local Computer Policy -> Computer Configuration -> Administrative Templates -> Windows Components -> Windows Update. Select that folder.
+- In the list select Configure Automatic Updates policy and set it to Disabled. This setting will disable automatic updates check and installation, but if you navigate to Updates in Windows Setting you'll implicitly launch automatic updates check and installation.
+- Change other options in MMC, if you really know what you're doing.
 
 Another approach is the Registry files:
 
