@@ -59,6 +59,7 @@ Change other options in MMC, if you really know what you're doing.
 Another approach is to the Registry files:
 
 [Disable automatic updates policy.reg](https://github.com/builtbybel/patchlady/raw/master/src/Patchlady/Disable%20automatic%20updates%20policy.reg)
+
 [Disable automatic updates & no restarts policies.reg](https://github.com/builtbybel/patchlady/raw/master/src/Patchlady/Disable%20automatic%20updates%20%26%20no%20restarts%20policies.reg)manual updates policy.reg
 
 
