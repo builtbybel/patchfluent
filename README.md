@@ -56,7 +56,7 @@ In order to do it via MMC:
 - In the list select Configure Automatic Updates policy and set it to Disabled. This setting will disable automatic updates check and installation, but if you navigate to Updates in Windows Setting you'll implicitly launch automatic updates check and installation.
 - Change other options in MMC, if you really know what you're doing.
 
-Another approach is the Registry files (for downloading **right-click and save one of .reg files**):
+Another approach is the Registry files (for downloading **right-click and save one of the .reg files**):
 
 - [Disable automatic updates policy.reg](https://github.com/builtbybel/patchlady/raw/master/src/Patchlady/Disable%20automatic%20updates%20policy.reg)
 - [Disable automatic updates & no restarts policies.reg](https://github.com/builtbybel/patchlady/raw/master/src/Patchlady/Disable%20automatic%20updates%20%26%20no%20restarts%20policies.reg)
