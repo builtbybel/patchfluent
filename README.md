@@ -38,7 +38,7 @@ alt="GitHub issues">
 
 ## About
 
-I found by chance this cool project from [slavanap](https://github.com/slavanap) called **[Windows10ManualUpdate](https://github.com/slavanap/Windows10ManualUpdate)** a few weeks ago and decided to take a closer look at it. Finally i managed to have a first look at it today and created a 1:1 fork. First I took care of the name and named it **Patchlady**. As an alternative I had PatchPal in mind, but didn't want any trouble with Elon "PayPal" Musk ;).
+I found by chance this cool project from [slavanap](https://github.com/slavanap) called **[Windows10ManualUpdate](https://github.com/slavanap/Windows10ManualUpdate)** a few weeks ago and decided to take a closer look at it. Finally I managed to have a first look at it today and created a 1:1 fork. First I took care of the name and named it **Patchlady**. As an alternative I had PatchPal in mind, but didn't want any trouble with Elon "PayPal" Musk ;).
 
 You are welcome to take a closer look at it and support slavanaps project or this fork. I would be very sorry if the project goes under. It has definitely had to be better valued.
 
@@ -56,11 +56,10 @@ On the left navigate to Local Computer Policy -> Computer Configuration -> Admin
 In the list select Configure Automatic Updates policy and set it to Disabled. This setting will disable automatic updates check and installation, but if you navigate to Updates in Windows Setting you'll implicitly launch automatic updates check and installation.
 Change other options in MMC, if you really know what you're doing.
 
-Another approach is to the Registry files:
+Another approach is the Registry files:
 
-[Disable automatic updates policy.reg](https://github.com/builtbybel/patchlady/raw/master/src/Patchlady/Disable%20automatic%20updates%20policy.reg)
-
-[Disable automatic updates & no restarts policies.reg](https://github.com/builtbybel/patchlady/raw/master/src/Patchlady/Disable%20automatic%20updates%20%26%20no%20restarts%20policies.reg)manual updates policy.reg
+- [Disable automatic updates policy.reg](https://github.com/builtbybel/patchlady/raw/master/src/Patchlady/Disable%20automatic%20updates%20policy.reg)
+- [Disable automatic updates & no restarts policies.reg](https://github.com/builtbybel/patchlady/raw/master/src/Patchlady/Disable%20automatic%20updates%20%26%20no%20restarts%20policies.reg)manual updates policy.reg
 
 
 ## Download
