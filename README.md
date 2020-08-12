@@ -65,7 +65,7 @@ Another approach is the Registry files (for downloading **right-click and save o
 ## Download
 
 - (Latest release) [Download](https://github.com/builtbybel/patchlady/releases)
-- (Source Code) [Download](https://github.com/builtbybel/patchlady/releases) 
+- (Source Code) [Download](https://github.com/builtbybel/patchlady/tree/master/src) 
 
 
 ## Credits
