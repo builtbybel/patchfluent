@@ -46,7 +46,7 @@ You are welcome to take a closer look at it and support slavanaps project or thi
 
 Note, this method may not work properly in Windows 10 Home.
 
-**Before running this app you must turn off automatic updates installation**. This could be done via Group Policy Object Editor MMC snap-in or via importing registry files into Windows Registry.
+**Before running this app you should turn off automatic updates installation**. This could be done via Group Policy Object Editor MMC snap-in or via importing registry files into Windows Registry.
 
 In order to do it via MMC:
 
