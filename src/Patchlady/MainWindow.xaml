@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Patchlady"
         mc:Ignorable="d"
-        Title="Patchlady" Height="558.295" Width="994.643" WindowStyle="ThreeDBorderWindow" Icon="patchlady.ico">
-    <Grid>
+        Title="Patchlady" Height="557.045" Width="994.643" WindowStyle="ThreeDBorderWindow" Icon="patchlady.ico" MinWidth="750" MinHeight="390">
+    <Grid Margin="0,0,0,2">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="198*"/>
             <ColumnDefinition Width="43*"/>
@@ -42,7 +42,7 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             </Grid>
-            <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" Cursor="SizeNS" ShowsPreview="True" Background="#FFFBFBFB" Margin="0,0,0,5" Grid.ColumnSpan="2"/>
+            <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" Cursor="SizeNS" ShowsPreview="True" Background="White" Margin="0,0,0,5" Grid.ColumnSpan="2"/>
             <Grid Grid.Row="2" Grid.ColumnSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="260*"/>
@@ -57,10 +57,10 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock x:Name="_status" Text="Description" FontFamily="Segoe UI Semibold" FontSize="16" Grid.ColumnSpan="7" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="_status" Text="Please wait." FontFamily="Segoe UI Semibold" FontSize="16" Grid.ColumnSpan="7" HorizontalAlignment="Center"/>
                 <RichTextBox Grid.Row="1" x:Name="_description" IsReadOnly="True" IsDocumentEnabled="True" Margin="0,5,0,12" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Auto" BorderThickness="0" Grid.ColumnSpan="7" VerticalScrollBarVisibility="Auto" />
             </Grid>
-            <Button Grid.Row="3" x:Name="_installButton" Content="Install updates" HorizontalAlignment="Right" Width="140" Height="25" Click="Install_Click" IsEnabled="False" Grid.Column="1" BorderThickness="0" BorderBrush="#FF4F4F4F" Margin="26,5,0,-6" />
+            <Button Grid.Row="3" x:Name="_installButton" Content="Install updates" HorizontalAlignment="Right" Width="140" Click="Install_Click" IsEnabled="False" Grid.Column="1" BorderThickness="0" BorderBrush="#FF4F4F4F" Margin="0,0,0,-6" Background="#FFC1C0C0" />
             <Image x:Name="_linkGitHub" HorizontalAlignment="Left" Margin="-4,0,511,0" Grid.Row="3" Width="24" Source="github.png" MouseLeftButtonDown="linkGitHub_MouseLeftButtonDown" Cursor="Hand" ToolTip="github/patchlady" VerticalAlignment="Bottom"/>
 
         </Grid>

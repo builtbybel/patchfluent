@@ -217,14 +217,14 @@ namespace Patchlady
                 }
                 else
                 {
-                    _status.Text = "Downloading updates...";
+                    _status.Text = "Downloading updates ...";
                     dynamic downloader = _updateSession.CreateUpdateDownloader();
                     downloader.Updates = updatesToInstall;
                     await Task.Run(() => { downloader.Download(); });
 
                     if (MessageBox.Show(this, "Installation ready. Continue?", "Notice", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        _status.Text = "Installing updates...";
+                        _status.Text = "Installing updates ...";
 
                         dynamic installer = _updateSession.CreateUpdateInstaller();
                         installer.Updates = updatesToInstall;
