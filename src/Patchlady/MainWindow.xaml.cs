@@ -189,6 +189,12 @@ namespace Patchlady
         public MainWindow()
         {
             InitializeComponent();
+
+            // GUI options
+            // This is using font icons predefined in the fonts of Segoe MDL2 Assets as UWP apps
+            _installAsset.Content= "\ue777";    // Update
+            _installHamburger.Content = "\ue700";    // Update
+
         }
 
         private async void Install_Click(object sender, RoutedEventArgs e)
@@ -222,8 +228,8 @@ namespace Patchlady
                     downloader.Updates = updatesToInstall;
                     await Task.Run(() => { downloader.Download(); });
 
-                    if (MessageBox.Show(this, "Installation ready. Continue?", "Notice", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                    {
+                   // if (MessageBox.Show(this, "Installation ready. Continue?", "Notice", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    //{
                         _status.Text = "Installing updates ...";
 
                         dynamic installer = _updateSession.CreateUpdateInstaller();
@@ -243,7 +249,7 @@ namespace Patchlady
                                 updatesToInstall.Item(i).Title);
                         }
                         MessageBox.Show(this, sb.ToString(), "Installation Result");
-                    }
+                    //}
                     await SearchForUpdates();
                 }
             }
@@ -253,7 +259,7 @@ namespace Patchlady
             }
 
             _installButton.IsEnabled = true;
-        }
+       }
 
         private void ListSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -268,7 +274,8 @@ namespace Patchlady
             }
         }
 
-        private void linkGitHub_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+
+        private void _imageGitHub_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             Process.Start("https://github.com/builtbybel/patchlady");
         }
