@@ -34,108 +34,6 @@ using System.Windows.Media;
 
 namespace Patchlady
 {
-    internal class UpdateItem
-    {
-        private readonly dynamic _update;
-
-        private int GetSizeOrder(decimal size)
-        {
-            int order;
-            for (order = 0; size > 1024; ++order)
-            {
-                size /= 1024;
-            }
-            return order;
-        }
-
-        private string SizeToString(decimal size, int order, bool addsuffix)
-        {
-            string fmt;
-            switch (order)
-            {
-                case 0: fmt = "{0} B"; break;
-                case 1: fmt = "{0} KB"; size /= 1024; break;
-                case 2: fmt = "{0} MB"; size /= 1024 * 1024; break;
-                default: fmt = "{0} GB"; size /= 1024 * 1024 * 1024; break;
-            }
-            return addsuffix
-                ? string.Format(fmt, (int)size)
-                : ((int)size).ToString();
-        }
-
-        public UpdateItem(dynamic update)
-        {
-            _update = update;
-
-            //IsChecked = _update.AutoSelectOnWebSites;     // this line will select them all
-            IsChecked = _update.IsMandatory;
-
-            var sb = new StringBuilder();
-            if (EulaAccepted == false)
-                sb.Append("[EULA NOT ACCEPTED] ");
-            sb.AppendFormat("{0}\n", _update.Title);
-            if (_update.Description != null)
-                sb.AppendFormat("{0}\n", _update.Description);
-            if (_update.MoreInfoUrls != null && _update.MoreInfoUrls.Count > 0)
-            {
-                sb.AppendFormat("More info:\n");
-                for (int i = 0; i < _update.MoreInfoUrls.Count; ++i)
-                    sb.AppendFormat("{0}\n", _update.MoreInfoUrls.Item(i));
-            }
-            if (_update.EulaText != null)
-                sb.AppendFormat("EULA TEXT:\n{0}\n\n", _update.EulaText);
-            if (_update.ReleaseNotes != null)
-                sb.AppendFormat("Release Notes:\n{0}\n\n", _update.ReleaseNotes);
-
-            dynamic bundle = _update.BundledUpdates;
-            if (bundle != null && bundle.Count > 0)
-            {
-                sb.AppendFormat("This update contains {0} packages:\n", bundle.Count);
-                for (int i = 0; i < bundle.Count; ++i)
-                {
-                    var item = new UpdateItem(bundle.Item(i));
-                    var desc = item.Description;
-                    desc = desc.Substring(0, desc.Length - 1);
-                    sb.AppendFormat("#{0}: {1}\n", i + 1, desc.Replace("\n", "\n * "));
-                }
-            }
-
-            decimal minSize = _update.MinDownloadSize;
-            decimal maxSize = _update.MaxDownloadSize;
-            string sizeString;
-            if (minSize == 0 || minSize == maxSize)
-            {
-                sizeString = SizeToString(maxSize, GetSizeOrder(maxSize), true);
-            }
-            else
-            {
-                int order = Math.Max(GetSizeOrder(minSize), GetSizeOrder(maxSize));
-                sizeString = string.Format("{0} - {1}",
-                    SizeToString(minSize, order, false),
-                    SizeToString(maxSize, order, true)
-                );
-            }
-            Title = string.Format("{0} ({1})", _update.Title, sizeString);
-
-            Description = sb.ToString();
-        }
-
-        public bool IsChecked { get; set; }
-        public string Title { get; }
-        public string Description { get; }
-
-        public dynamic Update { get { return _update; } }
-        public bool EulaAccepted { get { return _update.EulaAccepted; } }
-
-        public Brush Background
-        {
-            get
-            {
-                return Brushes.Transparent;
-                //return IsHidden ? SystemColors.InactiveCaptionTextBrush : Brushes.Transparent;
-            }
-        }
-    }
 
     public partial class MainWindow : Window
     {
@@ -166,7 +64,7 @@ namespace Patchlady
             _list.ItemsSource = list;
         }
 
-        protected override async void OnActivated(EventArgs e)
+        protected override async void OnActivated(EventArgs e) 
         {
             base.OnActivated(e);
             if (_updateSession == null)
@@ -191,9 +89,9 @@ namespace Patchlady
             InitializeComponent();
 
             // GUI options
-            // This is using font icons predefined in the fonts of Segoe MDL2 Assets as UWP apps
-            _installAsset.Content= "\ue777";    // Update
-            _installHamburger.Content = "\ue700";    // Update
+            // This is using font icons predefined in the fonts of Segoe MDL2 Assets
+            _assetHamburger.Content = "\ue700";    // Menu icon
+            _assetRefresh.Content= "\uecc5";       // Update icon
 
         }
 
@@ -219,7 +117,7 @@ namespace Patchlady
                 }
                 if (updatesToInstall.Count == 0)
                 {
-                    _status.Text = "All applicable updates were skipped.";
+                    _status.Text = "No updates are available.";
                 }
                 else
                 {
@@ -249,6 +147,7 @@ namespace Patchlady
                                 updatesToInstall.Item(i).Title);
                         }
                         MessageBox.Show(this, sb.ToString(), "Installation Result");
+                             _description.Document.Blocks.Clear();
                     //}
                     await SearchForUpdates();
                 }
@@ -278,6 +177,17 @@ namespace Patchlady
         private void _imageGitHub_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             Process.Start("https://github.com/builtbybel/patchlady");
+        }
+
+        private void _linkWUpdate_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Process.Start("ms-settings:windowsupdate");
+        }
+
+
+        private async void _assetRefresh_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            await SearchForUpdates();
         }
     }
 
@@ -314,6 +224,109 @@ namespace Patchlady
                     }
                 }
             }
+        }
+    }
+}
+
+internal class UpdateItem
+{
+    private readonly dynamic _update;
+
+    private int GetSizeOrder(decimal size)
+    {
+        int order;
+        for (order = 0; size > 1024; ++order)
+        {
+            size /= 1024;
+        }
+        return order;
+    }
+
+    private string SizeToString(decimal size, int order, bool addsuffix)
+    {
+        string fmt;
+        switch (order)
+        {
+            case 0: fmt = "{0} B"; break;
+            case 1: fmt = "{0} KB"; size /= 1024; break;
+            case 2: fmt = "{0} MB"; size /= 1024 * 1024; break;
+            default: fmt = "{0} GB"; size /= 1024 * 1024 * 1024; break;
+        }
+        return addsuffix
+            ? string.Format(fmt, (int)size)
+            : ((int)size).ToString();
+    }
+
+    public UpdateItem(dynamic update)
+    {
+        _update = update;
+
+        //IsChecked = _update.AutoSelectOnWebSites;     // this line will select them all
+        IsChecked = _update.IsMandatory;
+
+        var sb = new StringBuilder();
+        if (EulaAccepted == false)
+            sb.Append("[EULA NOT ACCEPTED] ");
+        sb.AppendFormat("{0}\n", _update.Title);
+        if (_update.Description != null)
+            sb.AppendFormat("{0}\n", _update.Description);
+        if (_update.MoreInfoUrls != null && _update.MoreInfoUrls.Count > 0)
+        {
+            sb.AppendFormat("More info:\n");
+            for (int i = 0; i < _update.MoreInfoUrls.Count; ++i)
+                sb.AppendFormat("{0}\n", _update.MoreInfoUrls.Item(i));
+        }
+        if (_update.EulaText != null)
+            sb.AppendFormat("EULA TEXT:\n{0}\n\n", _update.EulaText);
+        if (_update.ReleaseNotes != null)
+            sb.AppendFormat("Release Notes:\n{0}\n\n", _update.ReleaseNotes);
+
+        dynamic bundle = _update.BundledUpdates;
+        if (bundle != null && bundle.Count > 0)
+        {
+            sb.AppendFormat("This update contains {0} packages:\n", bundle.Count);
+            for (int i = 0; i < bundle.Count; ++i)
+            {
+                var item = new UpdateItem(bundle.Item(i));
+                var desc = item.Description;
+                desc = desc.Substring(0, desc.Length - 1);
+                sb.AppendFormat("#{0}: {1}\n", i + 1, desc.Replace("\n", "\n * "));
+            }
+        }
+
+        decimal minSize = _update.MinDownloadSize;
+        decimal maxSize = _update.MaxDownloadSize;
+        string sizeString;
+        if (minSize == 0 || minSize == maxSize)
+        {
+            sizeString = SizeToString(maxSize, GetSizeOrder(maxSize), true);
+        }
+        else
+        {
+            int order = Math.Max(GetSizeOrder(minSize), GetSizeOrder(maxSize));
+            sizeString = string.Format("{0} - {1}",
+                SizeToString(minSize, order, false),
+                SizeToString(maxSize, order, true)
+            );
+        }
+        Title = string.Format("{0} ({1})", _update.Title, sizeString);
+
+        Description = sb.ToString();
+    }
+
+    public bool IsChecked { get; set; }
+    public string Title { get; }
+    public string Description { get; }
+
+    public dynamic Update { get { return _update; } }
+    public bool EulaAccepted { get { return _update.EulaAccepted; } }
+
+    public Brush Background
+    {
+        get
+        {
+            return Brushes.Transparent;
+            //return IsHidden ? SystemColors.InactiveCaptionTextBrush : Brushes.Transparent;
         }
     }
 }

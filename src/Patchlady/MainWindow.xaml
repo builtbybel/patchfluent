@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Patchlady"
         mc:Ignorable="d"
-        Title="Patchlady" Width="946" WindowStyle="ThreeDBorderWindow" Icon="patchlady.ico" MinWidth="750" MinHeight="480" Height="689.934">
+        Title="Patchlady" Width="1084" WindowStyle="ThreeDBorderWindow" Icon="patchlady.ico" MinWidth="750" MinHeight="480" Height="902.692">
     <Grid Margin="2,3,0,-1" RenderTransformOrigin="0.178,0.196" UseLayoutRounding="False" Background="White">
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -15,55 +15,49 @@
             <ColumnDefinition Width="8*"/>
             <ColumnDefinition Width="21*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="1" Margin="17,10,0,0" RenderTransformOrigin="0.498,0.874" Height="142" Width="670" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <Grid Grid.Column="1" Margin="17,10,0,0" RenderTransformOrigin="0.498,0.874" Height="180" Width="670" HorizontalAlignment="Left" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="336*"/>
-                <ColumnDefinition Width="337*"/>
+                <ColumnDefinition Width="335*"/>
+                <ColumnDefinition Width="31*"/>
+                <ColumnDefinition Width="304*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Button x:Name="_installButton" Content="Install updates" HorizontalAlignment="Left" Width="188" VerticalAlignment="Bottom" Height="32" BorderThickness="0" Background="#FFCCCCCC" FontFamily="Segoe UI Semilight" FontSize="16" Click="Install_Click" IsEnabled="False" Margin="0,0,0,10"/>
-            <TextBlock x:Name="_status" Margin="52,0,0,72" RenderTransformOrigin="3.216,1.346" Width="289" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="23" FontFamily="Segoe UI Semilight" FontSize="18"><Run Text="Please wait."/></TextBlock>
-            <TextBlock x:Name="_status_Copy" Text="Windows Update" Margin="0,0,0,111" RenderTransformOrigin="3.216,1.346" Width="289" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="31" FontSize="24"/>
-            <Label x:Name="_installAsset" Content="" HorizontalAlignment="Left" Margin="1,42,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.316,-0.346" FontFamily="Segoe MDL2 Assets" FontSize="22" FontWeight="Bold" Height="38" Width="36"/>
+            <TextBlock x:Name="_status" Margin="51,0,0,62" RenderTransformOrigin="3.216,1.346" Width="289" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="23" FontFamily="Segoe UI Semilight" FontSize="18" Grid.ColumnSpan="2"><Run Text="Please wait."/></TextBlock>
+            <TextBlock x:Name="_status_Copy" Text="Customize Windows Updates" Margin="-1,0,0,139" RenderTransformOrigin="3.216,1.346" Width="390" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="37" FontSize="27" FontFamily="Segoe UI Semibold" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" Grid.ColumnSpan="3"/>
+            <Label x:Name="_assetRefresh" Content="" HorizontalAlignment="Left" Margin="0,92,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.316,-0.346" FontFamily="Segoe MDL2 Assets" FontSize="22" FontWeight="Bold" Height="41" Width="36" MouseLeftButtonDown="_assetRefresh_MouseLeftButtonDown" Cursor="Hand" ToolTip="Refresh"/>
+            <TextBlock x:Name="_linkWUpdate" Margin="0,0,0,110" RenderTransformOrigin="3.216,1.346" Width="289" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="23" FontFamily="Segoe UI Semilight" TextDecorations="{x:Null}" Foreground="#FFF115B5" Text="Open Windows Update page" FontSize="14" MouseLeftButtonDown="_linkWUpdate_MouseLeftButtonDown" Cursor="Hand" FontWeight="Light"/>
         </Grid>
         <RichTextBox x:Name="_description" IsReadOnly="True" IsDocumentEnabled="True" Margin="17,0,10,10" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Auto" Grid.Column="1" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" BorderThickness="0" VerticalScrollBarVisibility="Auto" Grid.Row="1" Height="253" VerticalAlignment="Bottom" FontFamily="Segoe UI Semilight" FontSize="14" />
-        <ListBox x:Name="_list" SelectionChanged="ListSelectionChanged" SelectionMode="Single" Background="White" BorderThickness="0" Margin="17,157,9,12" Grid.Column="1" RenderTransformOrigin="0.5,0.5" FontFamily="Segoe UI Semilight" FontSize="14">
-            <ListBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleX="0.864"/>
-                    <RotateTransform/>
-                    <TranslateTransform X="1.485"/>
-                </TransformGroup>
-            </ListBox.RenderTransform>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Background="{Binding Background}">
-                        <CheckBox Margin="0,0,5,0" IsChecked="{Binding IsChecked}" Background="Transparent"/>
-                        <TextBlock Text="{Binding Title}" Background="Transparent"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
         <Border BorderBrush="WhiteSmoke" BorderThickness="1" Grid.RowSpan="2" Background="WhiteSmoke" Margin="-1,0,1,0">
-            <Label x:Name="_installHamburger" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="-0.316,-0.346" FontFamily="Segoe MDL2 Assets" FontWeight="Bold" Height="38" Width="36" Background="WhiteSmoke" FontSize="18" Margin="9,9,0,0">
+            <Label x:Name="_assetHamburger" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="-0.316,-0.346" FontFamily="Segoe MDL2 Assets" FontWeight="Bold" Height="38" Width="36" Background="WhiteSmoke" FontSize="18" Margin="9,9,0,0">
                 <Label.Effect>
                     <BlurEffect/>
                 </Label.Effect>
             </Label>
         </Border>
         <Image x:Name="_imageGitHub" HorizontalAlignment="Left" Height="24" Margin="10,239,0,0" Grid.Row="1" VerticalAlignment="Top" Width="24" Source="github.png" Cursor="Hand" MouseLeftButtonDown="_imageGitHub_MouseLeftButtonDown" ToolTip="github/patchlady"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,115,0,0" TextWrapping="Wrap" Text="Get even more out of Windows 10" VerticalAlignment="Top" FontSize="20" TextDecorations="{x:Null}" Foreground="#FFF115B5">
+        <TextBlock HorizontalAlignment="Left" Margin="20,115,0,0" TextWrapping="Wrap" Text="Get even more out of Windows 10" VerticalAlignment="Top" FontSize="20" TextDecorations="{x:Null}" Foreground="#FFF115B5" Width="271" TextTrimming="CharacterEllipsis">
             <TextBlock.Effect>
                 <BlurEffect/>
             </TextBlock.Effect>
         </TextBlock>
-        <TextBlock HorizontalAlignment="Left" Margin="10,182,0,0" TextWrapping="Wrap" Text="These services are powered by Microsoft but allows you install each Update manually." VerticalAlignment="Top" FontSize="14" Height="73" Width="220" FontFamily="Segoe UI Light">
+        <TextBlock HorizontalAlignment="Left" Margin="20,182,0,0" TextWrapping="Wrap" Text="Select the updates you want to install on your PC right now. Note: unchecked updates can still be installed after installing checked updates" VerticalAlignment="Top" FontSize="14" Height="87" Width="260" FontFamily="Segoe UI Light" TextTrimming="CharacterEllipsis">
             <TextBlock.Effect>
                 <BlurEffect/>
             </TextBlock.Effect>
         </TextBlock>
+        <ListBox x:Name="_list" Grid.Column="1" Margin="17,195,10,10" FontFamily="Segoe UI Semilight" FontSize="14" BorderThickness="0" SelectionChanged="ListSelectionChanged" UseLayoutRounding="False">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Background="{Binding Background}">
+                        <CheckBox Margin="0,0,5,0" IsChecked="{Binding Path=IsChecked}" Background="Transparent"/>
+                        <TextBlock Text="{Binding Path=Title}" Background="Transparent"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>
