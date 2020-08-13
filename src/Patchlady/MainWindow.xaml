@@ -5,17 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Patchlady"
         mc:Ignorable="d"
-        Title="Patchlady" Width="1084" WindowStyle="ThreeDBorderWindow" Icon="patchlady.ico" MinWidth="750" MinHeight="480" Height="902.692">
+        Title="Patchlady" Width="1084" WindowStyle="ThreeDBorderWindow" Icon="patchlady.ico" MinWidth="820" MinHeight="495" Height="902.692">
     <Grid Margin="2,3,0,-1" RenderTransformOrigin="0.178,0.196" UseLayoutRounding="False" Background="White">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="Auto" MinHeight="273"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="8*"/>
-            <ColumnDefinition Width="21*"/>
+            <ColumnDefinition Width="Auto" MinWidth="318"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto" MinWidth="249"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="1" Margin="17,10,0,0" RenderTransformOrigin="0.498,0.874" Height="180" Width="670" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <Grid Grid.Column="1" Margin="17,10,0,0" RenderTransformOrigin="0.498,0.874" Height="177" Width="504" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="335*"/>
                 <ColumnDefinition Width="31*"/>
@@ -39,7 +40,7 @@
             </Label>
         </Border>
         <Image x:Name="_imageGitHub" HorizontalAlignment="Left" Height="24" Margin="10,239,0,0" Grid.Row="1" VerticalAlignment="Top" Width="24" Source="github.png" Cursor="Hand" MouseLeftButtonDown="_imageGitHub_MouseLeftButtonDown" ToolTip="github/patchlady"/>
-        <TextBlock HorizontalAlignment="Left" Margin="20,115,0,0" TextWrapping="Wrap" Text="Get even more out of Windows 10" VerticalAlignment="Top" FontSize="20" TextDecorations="{x:Null}" Foreground="#FFF115B5" Width="271" TextTrimming="CharacterEllipsis">
+        <TextBlock HorizontalAlignment="Left" Margin="20,115,0,0" TextWrapping="Wrap" Text="Get even more out of Windows 10" VerticalAlignment="Top" FontSize="20" TextDecorations="{x:Null}" Foreground="#FFF115B5" Width="260" Height="53">
             <TextBlock.Effect>
                 <BlurEffect/>
             </TextBlock.Effect>
@@ -59,5 +60,9 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <Label x:Name="_linkInfo" Content="Related links" Grid.Column="2" HorizontalAlignment="Left" Margin="23,73,0,0" VerticalAlignment="Top" FontSize="14" Height="29" Width="88" FontFamily="Segoe UI Semilight"/>
+        <Label x:Name="_linkUpdateHistory" Content="View update history" Grid.Column="2" HorizontalAlignment="Left" Margin="23,106,0,0" VerticalAlignment="Top" FontSize="14" Foreground="#FFF115B5" MouseLeftButtonDown="_linkUpdateHistory_MouseLeftButtonDown" Cursor="Hand" Height="29" Width="133"/>
+        <Label x:Name="_linkUpdateAdvanced" Content="Advanced options" Grid.Column="2" HorizontalAlignment="Left" Margin="23,182,0,0" VerticalAlignment="Top" FontSize="14" Foreground="#FFF115B5" Cursor="Hand" MouseLeftButtonDown="_linkUpdateAdvanced_MouseLeftButtonDown" Height="29" Width="122"/>
+        <Label x:Name="_linkUpdateOptional" Content="View optional updates" Grid.Column="2" HorizontalAlignment="Left" Margin="23,145,0,0" VerticalAlignment="Top" FontSize="14" Foreground="#FFF115B5" MouseLeftButtonDown="_linkUpdateOptional_MouseLeftButtonDown" Cursor="Hand" Height="29" Width="148"/>
     </Grid>
 </Window>

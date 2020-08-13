@@ -189,6 +189,21 @@ namespace Patchlady
         {
             await SearchForUpdates();
         }
+
+        private void _linkUpdateHistory_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Process.Start("ms-settings:windowsupdate-history");
+        }
+
+        private void _linkUpdateOptional_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Process.Start("ms-settings:windowsupdate-seekerondemand");
+        }
+
+        private void _linkUpdateAdvanced_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Process.Start("ms-settings:windowsupdate-options");
+        }
     }
 
     internal static class RichEditExtensions
