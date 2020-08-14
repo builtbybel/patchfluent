@@ -38,7 +38,7 @@ alt="GitHub issues">
 
 ## About
 
-I found by chance this cool project from slavanaphttps://github.com/slavanap called **[Windows10ManualUpdate](https://github.com/slavanap/Windows10ManualUpdate)** a few weeks ago and decided to take a closer look at it. **It allows you to customize and download Windows 10 updates manually.** Finally I managed to have a first look at it today and created a 1:1 fork. First I took care of the name and named it **Patchlady**. As an alternative I had PatchPal in mind, but didn't want any trouble with Elon "PayPal" Musk ;).
+I found by chance this cool project from slavanap called **[Windows10ManualUpdate](https://github.com/slavanap/Windows10ManualUpdate)** a few weeks ago and decided to take a closer look at it. **It allows you to customize and download Windows 10 updates manually.** Finally I managed to have a first look at it today and created a 1:1 fork. First I took care of the name and named it **Patchlady**. As an alternative I had PatchPal in mind, but didn't want any trouble with Elon "PayPal" Musk ;).
 
 You are welcome to take a closer look at it and support slavanaps project or this fork. I would be very sorry if the project goes under. It has definitely had to be better valued.
 
