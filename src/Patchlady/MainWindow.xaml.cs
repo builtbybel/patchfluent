@@ -34,7 +34,6 @@ using System.Windows.Media;
 
 namespace Patchlady
 {
-
     public partial class MainWindow : Window
     {
         private dynamic _updateSession = null;
@@ -44,6 +43,8 @@ namespace Patchlady
         private async Task SearchForUpdates()
         {
             _status.Text = "Checking for updates ...";
+            _description.Selection.Text = "No update selected";
+
             await Task.Run(() =>
             {
                 _searchResult = _updateSearcher.Search("IsInstalled=0");
@@ -64,7 +65,7 @@ namespace Patchlady
             _list.ItemsSource = list;
         }
 
-        protected override async void OnActivated(EventArgs e) 
+        protected override async void OnActivated(EventArgs e)
         {
             base.OnActivated(e);
             if (_updateSession == null)
@@ -91,8 +92,7 @@ namespace Patchlady
             // GUI options
             // This is using font icons predefined in the fonts of Segoe MDL2 Assets
             _assetHamburger.Content = "\ue700";    // Menu icon
-            _assetRefresh.Content= "\uecc5";       // Update icon
-
+            _assetRefresh.Content = "\uecc5";       // Update icon
         }
 
         private async void Install_Click(object sender, RoutedEventArgs e)
@@ -126,28 +126,28 @@ namespace Patchlady
                     downloader.Updates = updatesToInstall;
                     await Task.Run(() => { downloader.Download(); });
 
-                   // if (MessageBox.Show(this, "Installation ready. Continue?", "Notice", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    // if (MessageBox.Show(this, "Installation ready. Continue?", "Notice", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     //{
-                        _status.Text = "Installing updates ...";
+                    _status.Text = "Installing updates ...";
 
-                        dynamic installer = _updateSession.CreateUpdateInstaller();
-                        installer.Updates = updatesToInstall;
-                        dynamic installationResult = null;
-                        await Task.Run(() => { installationResult = installer.Install(); });
+                    dynamic installer = _updateSession.CreateUpdateInstaller();
+                    installer.Updates = updatesToInstall;
+                    dynamic installationResult = null;
+                    await Task.Run(() => { installationResult = installer.Install(); });
 
-                        var sb = new StringBuilder();
-                        if (installationResult.RebootRequired == true)
-                            sb.Append("[REBOOT REQUIRED] ");
-                        sb.AppendFormat("Code: {0}\n", installationResult.ResultCode);
-                        sb.Append("Listing of updates installed:\n");
-                        for (int i = 0; i < updatesToInstall.Count; ++i)
-                        {
-                            sb.AppendFormat("{0} : {1}\n",
-                                installationResult.GetUpdateResult(i).ResultCode,
-                                updatesToInstall.Item(i).Title);
-                        }
-                        MessageBox.Show(this, sb.ToString(), "Installation Result");
-                             _description.Document.Blocks.Clear();
+                    var sb = new StringBuilder();
+                    if (installationResult.RebootRequired == true)
+                        sb.Append("[REBOOT REQUIRED] ");
+                    sb.AppendFormat("Code: {0}\n", installationResult.ResultCode);
+                    sb.Append("Listing of updates installed:\n");
+                    for (int i = 0; i < updatesToInstall.Count; ++i)
+                    {
+                        sb.AppendFormat("{0} : {1}\n",
+                            installationResult.GetUpdateResult(i).ResultCode,
+                            updatesToInstall.Item(i).Title);
+                    }
+                    MessageBox.Show(this, sb.ToString(), "Installation Result");
+                    _description.Document.Blocks.Clear();
                     //}
                     await SearchForUpdates();
                 }
@@ -158,7 +158,7 @@ namespace Patchlady
             }
 
             _installButton.IsEnabled = true;
-       }
+        }
 
         private void ListSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -173,7 +173,6 @@ namespace Patchlady
             }
         }
 
-
         private void _imageGitHub_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             Process.Start("https://github.com/builtbybel/patchlady");
@@ -183,7 +182,6 @@ namespace Patchlady
         {
             Process.Start("ms-settings:windowsupdate");
         }
-
 
         private async void _assetRefresh_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
