@@ -1,7 +1,7 @@
 
 <h1 align="center">
   <br>
-  <a href="http://www.builtbybel.com"><img src="https://github.com/builtbybel/patchlady/blob/master/src/Patchlady/patchfluent.ico" alt="Patchfluent" width="64"></a>
+  <a href="http://www.builtbybel.com"><img src="https://github.com/builtbybel/patchlady/blob/master/src/Patchfluent/patchfluent.ico" alt="Patchfluent" width="64"></a>
   <br>
   Patchfluent
   <br>
