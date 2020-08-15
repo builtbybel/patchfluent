@@ -7,7 +7,7 @@
   <br>
 </h1>
 
-<h3 align="center">🦄 Customize Windows 10 Updates</h3>
+<h3 align="center">💧 Customize Windows 10 Updates</h3>
 
 <p align="center">
 <a href="https://github.com/builtbybel/patchlady/releases/latest" target="_blank">
