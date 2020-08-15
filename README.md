@@ -1,9 +1,9 @@
 
 <h1 align="center">
   <br>
-  <a href="http://www.builtbybel.com"><img src="https://github.com/builtbybel/patchlady/blob/master/src/Patchlady/patchlady.ico" alt="Patchlady" width="64"></a>
+  <a href="http://www.builtbybel.com"><img src="https://github.com/builtbybel/patchlady/blob/master/src/Patchlady/patchfluent.ico" alt="Patchfluent" width="64"></a>
   <br>
-  Patchlady
+  Patchfluent
   <br>
 </h1>
 
@@ -11,18 +11,18 @@
 
 <p align="center">
 <a href="https://github.com/builtbybel/patchlady/releases/latest" target="_blank">
-<img alt="Latest GitHub release" src="https://img.shields.io/github/release/builtbybel/patchlady.svg?style=flat-square" />
+<img alt="Latest GitHub release" src="https://img.shields.io/github/release/builtbybel/patchfluent.svg?style=flat-square" />
 </a>
 	
 <a href="https://github.com/builtbybel/patchlady/releases" target="_blank">
-<img alt="Downloads on GitHub" src="https://img.shields.io/github/downloads/builtbybel/patchlady/total.svg?style=flat-square" />
+<img alt="Downloads on GitHub" src="https://img.shields.io/github/downloads/builtbybel/patchfluent/total.svg?style=flat-square" />
 </a>
 
 <a href="https://github.com/builtbybel/patchlady/commits/master">
-<img src="https://img.shields.io/github/last-commit/builtbybel/patchlady.svg?style=flat-square&logo=github&logoColor=white"
+<img src="https://img.shields.io/github/last-commit/builtbybel/patchfluent.svg?style=flat-square&logo=github&logoColor=white"
 alt="GitHub last commit">
 <a href="https://github.com/builtbybel/patchlady/issues">
-<img src="https://img.shields.io/github/issues-raw/builtbybel/patchlady.svg?style=flat-square&logo=github&logoColor=white"
+<img src="https://img.shields.io/github/issues-raw/builtbybel/patchfluent.svg?style=flat-square&logo=github&logoColor=white"
 alt="GitHub issues">   
   
 </p>
@@ -34,11 +34,11 @@ alt="GitHub issues">
   <a href="#credits">Credits</a>
 </p>
 
-![screenshot](https://github.com/builtbybel/patchlady/blob/master/assets/patchlady.png)
+![screenshot](https://github.com/builtbybel/patchfluent/blob/master/assets/patchfluent.png)
 
 ## About
 
-I found by chance this cool project from slavanap called **[Windows10ManualUpdate](https://github.com/slavanap/Windows10ManualUpdate)** a few weeks ago and decided to take a closer look at it. **It allows you to customize and download Windows 10 updates manually.** Finally I managed to have a first look at it today and created a 1:1 fork. First I took care of the name and named it **Patchlady**. As an alternative I had PatchPal in mind, but didn't want any trouble with Elon "PayPal" Musk ;).
+I found by chance this cool project from slavanap called **[Windows10ManualUpdate](https://github.com/slavanap/Windows10ManualUpdate)** a few weeks ago and decided to take a closer look at it. **It allows you to customize and download Windows 10 updates manually.** Finally I managed to have a first look at it today and created a 1:1 fork. 
 
 You are welcome to take a closer look at it and support slavanaps project or this fork. I would be very sorry if the project goes under. It has definitely had to be better valued.
 
@@ -56,14 +56,14 @@ In order to do it via MMC:
 
 Another approach is the Registry files (for downloading **right-click and save one of the .reg files**):
 
-- [Disable automatic updates policy.reg](https://github.com/builtbybel/patchlady/raw/master/src/Patchlady/Disable%20automatic%20updates%20policy.reg)
-- [Disable automatic updates & no restarts policies.reg](https://github.com/builtbybel/patchlady/raw/master/src/Patchlady/Disable%20automatic%20updates%20%26%20no%20restarts%20policies.reg)
+- [Disable automatic updates policy.reg](https://github.com/builtbybel/ppatchfluent/raw/master/src/Patchfluent/Disable%20automatic%20updates%20policy.reg)
+- [Disable automatic updates & no restarts policies.reg](https://github.com/builtbybel/patchfluent/raw/master/src/Patchfluent/Disable%20automatic%20updates%20%26%20no%20restarts%20policies.reg)
 
 
 ## Download
 
-- (Latest release) [Download](https://github.com/builtbybel/patchlady/releases)
-- (Source Code) [Download](https://github.com/builtbybel/patchlady/tree/master/src) 
+- (Latest release) [Download](https://github.com/builtbybel/patchfluent/releases)
+- (Source Code) [Download](https://github.com/builtbybel/patchfluent/tree/master/src) 
 
 
 ## Credits
