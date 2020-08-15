@@ -39,7 +39,8 @@ alt="GitHub issues">
 ## About
 
 I found by chance this cool project from slavanap called **[Windows10ManualUpdate](https://github.com/slavanap/Windows10ManualUpdate)** a few weeks ago and decided to take a closer look at it. **It allows you to customize and download Windows 10 updates manually.** Finally I managed to have a first look at it today and created a 1:1 fork. 
-
+This is my first attempt to rebuild the Windows Update GUI. Its not finished yet and some elements were made unrecognizable with blur effects
+ 
 You are welcome to take a closer look at it and support slavanaps project or this fork. I would be very sorry if the project goes under. It has definitely had to be better valued.
 
 ## How-to
