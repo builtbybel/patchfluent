@@ -24,21 +24,72 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Media;
 
 namespace Patchfluent
 {
     public partial class MainWindow : Window
     {
+        // Some app update strings
+        private readonly string _releaseURL = "https://raw.githubusercontent.com/builtbybel/patchfluent/master/latest.txt";
+
+        internal static string GetCurrentVersionTostring() => Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
+
+        public Version CurrentVersion = new Version(GetCurrentVersionTostring());
+        public Version LatestVersion;
+
+        // Windows update
         private dynamic _updateSession = null;
+
         private dynamic _updateSearcher = null;
         private dynamic _searchResult = null;
+
+        private void SearchForAppUpdates()
+        {
+            try
+            {
+                WebRequest hreq = WebRequest.Create(_releaseURL);
+                hreq.Timeout = 10000;
+                hreq.Headers.Set("Cache-Control", "no-cache, no-store, must-revalidate");
+
+                WebResponse hres = hreq.GetResponse();
+                StreamReader sr = new StreamReader(hres.GetResponseStream());
+
+                LatestVersion = new Version(sr.ReadToEnd().Trim());
+
+                // Done and dispose!
+                sr.Dispose();
+                hres.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK); // Update check failed!
+            }
+
+            var equals = LatestVersion.CompareTo(CurrentVersion);
+
+            if (equals == 0)
+            {
+                _appUpdateAvailable.Visibility = Visibility.Hidden;
+            }
+            else if (equals < 0)
+            {
+                //MessageBox.Show("You are using an unoffical version of Patchfluent.","",  MessageBoxButton.OK); // Unofficial
+                _appUpdateAvailable.Visibility = Visibility.Hidden;
+            }
+            else // New release available!
+            {
+                _appUpdateAvailable.Visibility = Visibility.Visible;
+            }
+        }
 
         private async Task SearchForUpdates()
         {
@@ -75,7 +126,8 @@ namespace Patchfluent
                     _updateSession = Activator.CreateInstance(Type.GetTypeFromProgID("Microsoft.Update.Session"));
                     _updateSession.ClientApplicationID = "Patchfluent";
                     _updateSearcher = _updateSession.CreateUpdateSearcher();
-                    await SearchForUpdates();
+                     await SearchForUpdates(); // Search for Windows updates
+                     SearchForAppUpdates(); // Search for app updates
                     _installButton.IsEnabled = true;
                 }
                 catch (Exception ex)
@@ -201,6 +253,14 @@ namespace Patchfluent
         private void _linkUpdateAdvanced_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             Process.Start("ms-settings:windowsupdate-options");
+        }
+
+        private void NewVersion_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("There is a new version of Patchfluent available " + LatestVersion + "\nYour are using version " + CurrentVersion + "\n\nDo you want to open the @github/releases page?", "", MessageBoxButton.YesNo) == MessageBoxResult.Yes) // New release available!
+            {
+                Process.Start("https://github.com/builtbybel/patchfluent/releases/tag/" + LatestVersion);
+            }
         }
     }
 
@@ -333,13 +393,4 @@ internal class UpdateItem
 
     public dynamic Update { get { return _update; } }
     public bool EulaAccepted { get { return _update.EulaAccepted; } }
-
-    public Brush Background
-    {
-        get
-        {
-            return Brushes.Transparent;
-            //return IsHidden ? SystemColors.InactiveCaptionTextBrush : Brushes.Transparent;
-        }
-    }
 }

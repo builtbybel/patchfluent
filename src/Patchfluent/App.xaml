@@ -1,7 +1,7 @@
-﻿<Application x:Class="Patchlady.App"
+﻿<Application x:Class="Patchfluent.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Patchlady"
+             xmlns:local="clr-namespace:Patchfluent"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
          
