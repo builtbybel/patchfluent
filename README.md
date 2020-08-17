@@ -57,7 +57,7 @@ In order to do it via MMC:
 
 Another approach is the Registry files (for downloading **right-click and save one of the .reg files**):
 
-- [Disable automatic updates policy.reg](https://github.com/builtbybel/ppatchfluent/raw/master/src/Patchfluent/Disable%20automatic%20updates%20policy.reg)
+- [Disable automatic updates policy.reg](https://github.com/builtbybel/patchfluent/raw/master/src/Patchfluent/Disable%20automatic%20updates%20policy.reg)
 - [Disable automatic updates & no restarts policies.reg](https://github.com/builtbybel/patchfluent/raw/master/src/Patchfluent/Disable%20automatic%20updates%20%26%20no%20restarts%20policies.reg)
 
 
