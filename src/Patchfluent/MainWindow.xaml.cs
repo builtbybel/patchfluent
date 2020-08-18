@@ -165,21 +165,25 @@ namespace Patchfluent
             RegistryKey RegHKLM = Registry.LocalMachine;
             RegistryKey updateRegHKLM;
 
-            updateRegHKLM = RegHKLM.OpenSubKey(@"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU");
+            if (RegHKLM.OpenSubKey(@"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU") != null)  
+            {
+                updateRegHKLM = RegHKLM.OpenSubKey(@"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU");
 
-            if ((Int32)updateRegHKLM.GetValue("AUOptions") == 2) { _checkAU.IsChecked = true; _checkAU.Content = "Automatic updates are disabled"; }
-            else { _checkAU.IsChecked = false; _checkAU.Content = "Automatic updates are enabled"; }
+                if (updateRegHKLM.GetValueNames().Contains("AUOptions"))
+                {
+                    if ((Int32)updateRegHKLM.GetValue("AUOptions") == 2) { _checkAU.IsChecked = true; _checkAU.Content = "Automatic updates are disabled"; }
+                    else { _checkAU.IsChecked = false; _checkAU.Content = "Automatic updates are enabled"; }
+                }
 
-            updateRegHKLM.Close();
+                updateRegHKLM.Close();
+            }
         }
-
 
         /// <summary>
         ///  Configure auto. update options
         /// </summary>
         private void ConfigureAU_Click(object sender, RoutedEventArgs e)
         {
-
             string key = null;
             RegistryKey RegHKLM = Registry.LocalMachine;
             if (Environment.Is64BitOperatingSystem) RegHKLM = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
@@ -191,7 +195,6 @@ namespace Patchfluent
             if (itmChk) { updateRegHKLM.OpenSubKey(key, true).SetValue("AUOptions", 2, RegistryValueKind.DWord); CheckAU(); }  // Disable AU
             else { updateRegHKLM.OpenSubKey(key, true).SetValue("AUOptions", 1, RegistryValueKind.DWord); CheckAU(); }        // Enable
         }
-
 
         private async void Install_Click(object sender, RoutedEventArgs e)
         {
