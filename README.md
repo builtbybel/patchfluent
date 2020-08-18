@@ -30,7 +30,7 @@ alt="GitHub issues">
 <p align="center">
   <a href="#about">About</a> •
   <a href="#download">Download</a> •
-  <a href="#how-to>How-to</a> •
+  <a href="#how-to">How-to</a> •
   <a href="#credits">Credits</a>
 </p>
 
