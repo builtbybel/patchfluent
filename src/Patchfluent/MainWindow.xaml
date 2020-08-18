@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Patchfluent"
         mc:Ignorable="d"
-        Title="Patchfluent" Width="1094" WindowStyle="ThreeDBorderWindow" Icon="patchfluent.ico" MinWidth="820" MinHeight="560" Height="902.692">
+        Title="Patchfluent" Width="1094" WindowStyle="ThreeDBorderWindow" MinWidth="1040" MinHeight="560" Height="902.692">
+    <Window.Icon>
+        <DrawingImage/>
+    </Window.Icon>
     <Grid Margin="2,3,0,-1" RenderTransformOrigin="0.178,0.196" UseLayoutRounding="False" Background="White">
         <Grid.RowDefinitions>
             <RowDefinition />
@@ -18,7 +21,7 @@
             <ColumnDefinition Width="Auto" MinWidth="291" />
         </Grid.ColumnDefinitions>
         <Border BorderBrush="White" BorderThickness="3,0,0,0" Grid.RowSpan="2" Background="White" Margin="2,0,0,2" Grid.Column="3">
-            <RichTextBox x:Name="_description" IsReadOnly="True" IsDocumentEnabled="True" Margin="11,245,5,2" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Stretch" BorderThickness="0" VerticalScrollBarVisibility="Auto" FontFamily="Segoe UI Semilight" FontSize="14" Background="{x:Null}" Width="271" >
+            <RichTextBox x:Name="_description" IsReadOnly="True" IsDocumentEnabled="True" Margin="11,245,0,2" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Auto" VerticalContentAlignment="Stretch" BorderThickness="0" VerticalScrollBarVisibility="Auto" FontFamily="Segoe UI Semilight" FontSize="14" Background="{x:Null}" Width="275" >
                 <FlowDocument>
                     <Paragraph Padding="5,0,0,0"/>
                 </FlowDocument>
@@ -31,29 +34,36 @@
                 <ColumnDefinition Width="304*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition />
+                <RowDefinition Height="17*" />
+                <RowDefinition Height="42*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="_installButton" Content="Install updates" HorizontalAlignment="Left" Width="188" VerticalAlignment="Bottom" Height="32" BorderThickness="0" Background="#FFCCCCCC" FontFamily="Segoe UI Semilight" FontSize="16" Click="Install_Click" IsEnabled="False" Margin="3,0,0,0" />
-            <TextBlock x:Name="_status" Margin="51,0,0,62" RenderTransformOrigin="3.216,1.346" Width="289" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="23" FontSize="18" Grid.ColumnSpan="2"><Run Text="Please wait." /></TextBlock>
-            <TextBlock x:Name="_textHeader" Text="Customize Windows Updates" Margin="-1,0,0,139" RenderTransformOrigin="3.216,1.346" Width="390" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="37" FontSize="27" Grid.ColumnSpan="3" FontFamily="Segoe UI Semibold" TextWrapping="Wrap" />
-            <Label x:Name="_assetRefresh" Content="" HorizontalAlignment="Left" Margin="0,92,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.316,-0.346" FontFamily="Segoe MDL2 Assets" FontSize="22" FontWeight="Bold" Height="41" Width="36" MouseLeftButtonDown="_assetRefresh_MouseLeftButtonDown" Cursor="Hand" ToolTip="Refresh" />
-            <TextBlock x:Name="_linkWUpdate" Margin="0,0,0,110" RenderTransformOrigin="3.216,1.346" Width="289" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="23" FontFamily="Segoe UI Semilight" TextDecorations="{x:Null}" Foreground="#FFF115B5" Text="Open Windows Update page" FontSize="14" MouseLeftButtonDown="_linkWUpdate_MouseLeftButtonDown" Cursor="Hand" FontWeight="Light" />
-            <Button x:Name="_appUpdateAvailable" Content="Optional updates available" HorizontalAlignment="Left" Width="202" VerticalAlignment="Bottom" Height="32" BorderThickness="0" Background="#FFCCCCCC" FontFamily="Segoe UI Semilight" FontSize="16" Click="NewVersion_Click" Margin="201,0,0,0" Grid.ColumnSpan="3" Visibility="Hidden" />
+            <Button x:Name="_installButton" Content="Install updates" HorizontalAlignment="Left" Width="188" VerticalAlignment="Bottom" Height="32" BorderThickness="0" Background="#FFCCCCCC" FontFamily="Segoe UI Semilight" FontSize="16" Click="Install_Click" IsEnabled="False" Margin="3,0,0,0" Grid.Row="1" />
+            <TextBlock x:Name="_status" Margin="51,0,0,60" RenderTransformOrigin="3.216,1.346" Width="406" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="23" FontSize="18" Grid.ColumnSpan="3" TextTrimming="CharacterEllipsis" Grid.Row="1"><Run Text="Please wait." /></TextBlock>
+            <TextBlock x:Name="_textHeader" Text="Customize Windows Updates" Margin="-1,0,0,13" RenderTransformOrigin="3.216,1.346" Width="390" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="37" FontSize="27" Grid.ColumnSpan="3" FontFamily="Segoe UI Semibold" TextWrapping="Wrap" />
+            <Label x:Name="_assetRefresh" Content="" HorizontalAlignment="Left" Margin="0,41,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.316,-0.346" FontFamily="Segoe MDL2 Assets" FontSize="22" FontWeight="Bold" Height="41" Width="36" MouseLeftButtonDown="_assetRefresh_MouseLeftButtonDown" Cursor="Hand" ToolTip="Refresh" Grid.Row="1" />
+            <Button x:Name="_appUpdateAvailable" Content="Optional updates available" HorizontalAlignment="Left" Width="202" VerticalAlignment="Bottom" Height="32" BorderThickness="0" Background="#FFCCCCCC" FontFamily="Segoe UI Semilight" FontSize="16" Click="NewVersion_Click" Margin="201,0,0,0" Grid.ColumnSpan="3" Visibility="Hidden" Grid.Row="1" />
+            <CheckBox x:Name="_checkAU" Content="Automatic updates" HorizontalAlignment="Left" Margin="-1,44,0,0" VerticalAlignment="Top" Height="21" Width="357" BorderBrush="#FFD688C1" Foreground="Black" UseLayoutRounding="False" FontFamily="Segoe UI Semilight" Grid.RowSpan="2" FontSize="13" Grid.ColumnSpan="3" Click="ConfigureAU_Click" Opacity="0.7" ToolTip="Before running this app you should turn off automatic updates installation to get full controll over the updates (not a requirement)"/>
         </Grid>
-        <Border BorderBrush="WhiteSmoke" BorderThickness="0" Grid.RowSpan="2" Background="#FFE1E0DE" Margin="-5,-4,0,0">
+        <Border BorderBrush="WhiteSmoke" BorderThickness="0" Grid.RowSpan="2" Margin="-5,-2,0,0">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF0F0F0"/>
+                    <GradientStop Color="#FFDAD0DA" Offset="0.517"/>
+                </LinearGradientBrush>
+            </Border.Background>
             <Border.Effect>
                 <BlurEffect/>
             </Border.Effect>
-            <Label x:Name="_assetHamburger" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="-0.316,-0.346" FontFamily="Segoe MDL2 Assets" FontWeight="Bold" Height="38" Width="36" Background="{x:Null}" FontSize="18" Margin="9,9,0,0">
+            <Label x:Name="_assetHamburger" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="-0.316,-0.346" FontFamily="Segoe MDL2 Assets" FontWeight="Bold" Height="38" Width="36" Background="{x:Null}" FontSize="18" Margin="20,16,0,0">
                 <Label.Effect>
                     <BlurEffect />
                 </Label.Effect>
             </Label>
         </Border>
         <Image x:Name="_imageGitHub" HorizontalAlignment="Left" Height="24" Margin="10,239,0,0" Grid.Row="1" VerticalAlignment="Top" Width="24" Source="github.png" Cursor="Hand" MouseLeftButtonDown="_imageGitHub_MouseLeftButtonDown" ToolTip="github/patchfluent" />
-        <TextBlock HorizontalAlignment="Left" Margin="21,105,0,0" TextWrapping="Wrap" Text="Get even more out of Windows 10" VerticalAlignment="Top" FontSize="20" TextDecorations="{x:Null}" Foreground="#FFF115B5" Width="276" Height="53" FontFamily="Segoe UI Semibold"/>
-        <TextBlock HorizontalAlignment="Left" Margin="21,181,0,0" TextWrapping="Wrap" Text="With Patchfluent, you decide when and how to get the latest updates to keep your device running smoothly and securely.﻿" VerticalAlignment="Top" FontSize="14" Height="67" Width="278" FontFamily="Segoe UI Light" TextTrimming="CharacterEllipsis"/>
-        <ListBox x:Name="_list" Grid.Column="1" Margin="17,256,10,6" FontFamily="Segoe UI Semilight" FontSize="14" BorderThickness="0" SelectionChanged="ListSelectionChanged" UseLayoutRounding="False" Grid.RowSpan="2" Grid.ColumnSpan="2">
+        <TextBlock HorizontalAlignment="Left" Margin="20,70,0,0" TextWrapping="Wrap" Text="Get even more out of Windows 10" VerticalAlignment="Top" FontSize="20" TextDecorations="{x:Null}" Foreground="#FFF115B5" Width="276" Height="53" FontFamily="Segoe UI Semibold"/>
+        <TextBlock HorizontalAlignment="Left" Margin="20,146,0,0" TextWrapping="Wrap" Text="With Patchfluent, you decide when and how to get the latest updates to keep your device running smoothly and securely.﻿" VerticalAlignment="Top" FontSize="14" Height="67" Width="278" FontFamily="Segoe UI Light" TextTrimming="CharacterEllipsis"/>
+        <ListBox x:Name="_list" Grid.Column="1" Margin="17,256,10,6" FontFamily="Segoe UI Semilight" FontSize="14" BorderThickness="0" SelectionChanged="ListSelectionChanged" UseLayoutRounding="False" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="{x:Null}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" Background="{Binding Background}">

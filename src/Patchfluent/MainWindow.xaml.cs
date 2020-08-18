@@ -1,7 +1,5 @@
 ﻿//
-// Patchfluent
 // Copyright 2016 Vyacheslav Napadovsky.
-// Forked as Patchfluent, Builtbybel (C) 2020
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,6 +19,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+/*
+ Forked as Patchfluent
+ Copyright 2020, Builtbybel (www.builtbybel.com)
+ For ref. take a look at the scripting example provided by Microsoft https://docs.microsoft.com/en-us/windows/win32/wua_sdk/searching--downloading--and-installing-updates
+ */
+
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -38,7 +43,7 @@ namespace Patchfluent
 {
     public partial class MainWindow : Window
     {
-        // Some app update strings
+        // App update
         private readonly string _releaseURL = "https://raw.githubusercontent.com/builtbybel/patchfluent/master/latest.txt";
 
         internal static string GetCurrentVersionTostring() => Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
@@ -71,7 +76,7 @@ namespace Patchfluent
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "", MessageBoxButton.OK); // Update check failed!
+                MessageBox.Show(ex.Message, "", MessageBoxButton.OK);   // Update check failed!
             }
 
             var equals = LatestVersion.CompareTo(CurrentVersion);
@@ -82,10 +87,10 @@ namespace Patchfluent
             }
             else if (equals < 0)
             {
-                //MessageBox.Show("You are using an unoffical version of Patchfluent.","",  MessageBoxButton.OK); // Unofficial
+                // MessageBox.Show("You are using an unoffical version of Patchfluent.","",  MessageBoxButton.OK);  // Unofficial
                 _appUpdateAvailable.Visibility = Visibility.Hidden;
             }
-            else // New release available!
+            else    // New release available!
             {
                 _appUpdateAvailable.Visibility = Visibility.Visible;
             }
@@ -126,13 +131,16 @@ namespace Patchfluent
                     _updateSession = Activator.CreateInstance(Type.GetTypeFromProgID("Microsoft.Update.Session"));
                     _updateSession.ClientApplicationID = "Patchfluent";
                     _updateSearcher = _updateSession.CreateUpdateSearcher();
-                     await SearchForUpdates(); // Search for Windows updates
-                     SearchForAppUpdates(); // Search for app updates
+                    await SearchForUpdates();   // Search for Windows updates
+                    SearchForAppUpdates();      // Search for app updates
+
                     _installButton.IsEnabled = true;
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(this, ex.ToString(), "Exception has occured!");
+                    MessageBox.Show(this, ex.ToString(), "Exception has occured");
+                    _status.Text = "Windows Update service is not available.";
+                    IsEnabled = false;
                 }
             }
         }
@@ -144,8 +152,46 @@ namespace Patchfluent
             // GUI options
             // This is using font icons predefined in the fonts of Segoe MDL2 Assets
             _assetHamburger.Content = "\ue700";    // Menu icon
-            _assetRefresh.Content = "\uecc5";       // Update icon
+            _assetRefresh.Content = "\uecc5";      // Update icon
+
+            CheckAU();      // Check auto. update status
         }
+
+        /// <summary>
+        ///  Check auto. update options
+        /// </summary>
+        private void CheckAU()
+        {
+            RegistryKey RegHKLM = Registry.LocalMachine;
+            RegistryKey updateRegHKLM;
+
+            updateRegHKLM = RegHKLM.OpenSubKey(@"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU");
+
+            if ((Int32)updateRegHKLM.GetValue("AUOptions") == 2) { _checkAU.IsChecked = true; _checkAU.Content = "Automatic updates are disabled"; }
+            else { _checkAU.IsChecked = false; _checkAU.Content = "Automatic updates are enabled"; }
+
+            updateRegHKLM.Close();
+        }
+
+
+        /// <summary>
+        ///  Configure auto. update options
+        /// </summary>
+        private void ConfigureAU_Click(object sender, RoutedEventArgs e)
+        {
+
+            string key = null;
+            RegistryKey RegHKLM = Registry.LocalMachine;
+            if (Environment.Is64BitOperatingSystem) RegHKLM = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
+
+            RegistryKey updateRegHKLM = RegHKLM;
+            bool itmChk = _checkAU.IsChecked.Value;
+
+            key = @"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU";
+            if (itmChk) { updateRegHKLM.OpenSubKey(key, true).SetValue("AUOptions", 2, RegistryValueKind.DWord); CheckAU(); }  // Disable AU
+            else { updateRegHKLM.OpenSubKey(key, true).SetValue("AUOptions", 1, RegistryValueKind.DWord); CheckAU(); }        // Enable
+        }
+
 
         private async void Install_Click(object sender, RoutedEventArgs e)
         {
@@ -178,8 +224,6 @@ namespace Patchfluent
                     downloader.Updates = updatesToInstall;
                     await Task.Run(() => { downloader.Download(); });
 
-                    // if (MessageBox.Show(this, "Installation ready. Continue?", "Notice", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                    //{
                     _status.Text = "Installing updates ...";
 
                     dynamic installer = _updateSession.CreateUpdateInstaller();
@@ -190,23 +234,23 @@ namespace Patchfluent
                     var sb = new StringBuilder();
                     if (installationResult.RebootRequired == true)
                         sb.Append("[REBOOT REQUIRED] ");
-                    sb.AppendFormat("Code: {0}\n", installationResult.ResultCode);
-                    sb.Append("Listing of updates installed:\n");
+                    // sb.AppendFormat("Code: {0}\n", installationResult.ResultCode);
+                    sb.Append("\n");
                     for (int i = 0; i < updatesToInstall.Count; ++i)
                     {
-                        sb.AppendFormat("{0} : {1}\n",
-                            installationResult.GetUpdateResult(i).ResultCode,
+                        sb.AppendFormat("{1}\n",
+                           installationResult.GetUpdateResult(i).ResultCode,
                             updatesToInstall.Item(i).Title);
                     }
-                    MessageBox.Show(this, sb.ToString(), "Installation Result");
+                    MessageBox.Show(this, sb.ToString(), "Installed Updates");
                     _description.Document.Blocks.Clear();
-                    //}
+
                     await SearchForUpdates();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, ex.ToString(), "Exception has occured!");
+                MessageBox.Show(this, ex.ToString(), "Exception has occured");
             }
 
             _installButton.IsEnabled = true;
@@ -228,11 +272,6 @@ namespace Patchfluent
         private void _imageGitHub_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             Process.Start("https://github.com/builtbybel/patchfluent");
-        }
-
-        private void _linkWUpdate_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            Process.Start("ms-settings:windowsupdate");
         }
 
         private async void _assetRefresh_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
