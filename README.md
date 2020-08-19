@@ -62,6 +62,7 @@ This project is based upon
 
 This software uses the following packages:
 
+- [FluentWPF](https://github.com/sourcechord/FluentWPF)
 - [Icons8.de](https://icons8.de/)
 
 ---
