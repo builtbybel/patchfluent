@@ -41,7 +41,7 @@ using System.Windows.Documents;
 
 namespace Patchfluent
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         // App update
         private readonly string _releaseURL = "https://raw.githubusercontent.com/builtbybel/patchfluent/master/latest.txt";
@@ -105,10 +105,12 @@ namespace Patchfluent
             {
                 _searchResult = _updateSearcher.Search("IsInstalled=0");
             });
+
             _status.Text = "Updates are available.";
             var list = new List<UpdateItem>();
             int count = _searchResult.Updates.Count;
             _installButton.IsEnabled = count > 0;
+
             if (count > 0)
             {
                 for (int i = 0; i < _searchResult.Updates.Count; ++i)
@@ -117,6 +119,7 @@ namespace Patchfluent
             else
             {
                 _status.Text = "Your device is up to date.";
+                _statusCurrent.Text = "";
             }
             _list.ItemsSource = list;
         }
@@ -165,14 +168,14 @@ namespace Patchfluent
             RegistryKey RegHKLM = Registry.LocalMachine;
             RegistryKey updateRegHKLM;
 
-            if (RegHKLM.OpenSubKey(@"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU") != null)  
+            if (RegHKLM.OpenSubKey(@"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU") != null)
             {
                 updateRegHKLM = RegHKLM.OpenSubKey(@"SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU");
 
                 if (updateRegHKLM.GetValueNames().Contains("AUOptions"))
                 {
-                    if ((Int32)updateRegHKLM.GetValue("AUOptions") == 2) { _checkAU.IsChecked = true; _checkAU.Content = "Automatic updates are disabled"; }
-                    else { _checkAU.IsChecked = false; _checkAU.Content = "Automatic updates are enabled"; }
+                    if ((Int32)updateRegHKLM.GetValue("AUOptions") == 2) { _checkAU.IsChecked = true; _checkAU.Content = "*Automatic updates on this device are turned off."; }
+                    else { _checkAU.IsChecked = false; _checkAU.Content = "*Automatic updates on this device are turned on."; }
                 }
 
                 updateRegHKLM.Close();
@@ -184,7 +187,7 @@ namespace Patchfluent
         /// </summary>
         private void ConfigureAU_Click(object sender, RoutedEventArgs e)
         {
-            string key = null;
+            string key;
             RegistryKey RegHKLM = Registry.LocalMachine;
             if (Environment.Is64BitOperatingSystem) RegHKLM = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry64);
 
@@ -227,7 +230,8 @@ namespace Patchfluent
                     downloader.Updates = updatesToInstall;
                     await Task.Run(() => { downloader.Download(); });
 
-                    _status.Text = "Installing updates ...";
+                    for (int i = 0; i < updatesToInstall.Count; ++i)
+                    { _status.Text = "Installing updates ... "; _statusCurrent.Text = updatesToInstall.Item(i).Title; }
 
                     dynamic installer = _updateSession.CreateUpdateInstaller();
                     installer.Updates = updatesToInstall;

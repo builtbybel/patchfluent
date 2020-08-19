@@ -8,7 +8,7 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Patchfluent")]
-[assembly: AssemblyDescription("Windows Update alternative")]
+[assembly: AssemblyDescription("Windows 10 Update alternative")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Builtbybel")]
 [assembly: AssemblyProduct("Patchfluent")]
@@ -51,5 +51,5 @@ using System.Windows;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.11.7")]
-[assembly: AssemblyFileVersion("0.11.7")]
+[assembly: AssemblyVersion("0.12.2")]
+[assembly: AssemblyFileVersion("0.12.2")]
