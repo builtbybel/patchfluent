@@ -37,9 +37,9 @@ alt="GitHub issues">
 
 ## About
 
-I found by chance this cool project from slavanap called **[Windows10ManualUpdate](https://github.com/slavanap/Windows10ManualUpdate)** a few weeks ago and decided to take a closer look at it. **It allows you to customize and download Windows 10 updates manually.** Finally I managed to have a first look at it today and created a 1:1 fork. 
+I found by chance this cool project from slavanap called [Windows10ManualUpdate](https://github.com/slavanap/Windows10ManualUpdate) a few weeks ago and decided to take a closer look at it. **It allows you to customize and download Windows 10 updates manually.** Finally I managed to have a first look at it today and created fork. 
 
-This is my first attempt to rebuild the Windows Update GUI. It adds some touches of [zeealeid's concept](https://twitter.com/zeealeid/status/1220319947831812102). Its not finished yet and some elements were made unrecognizable with blur effects but the main functions of delivering and installing updates manually work of course.
+This is my first attempt to rebuild the Windows Update GUI. **My fork named Patchfluent merges the traditional functionality and aesthetics of Windows 10 update but gives you more control over the updates**. It adds some touches of [zeealeid's concept](https://twitter.com/zeealeid/status/1220319947831812102). Its not finished yet and some elements were made unrecognizable with blur effects but the main functions of delivering and installing updates manually work of course.
  
 You are welcome to take a closer look at it and support slavanaps project or this fork. I would be very sorry if the project goes under. It has definitely had to be better valued.
 
