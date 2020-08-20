@@ -45,7 +45,7 @@ You are welcome to take a closer look at it and support slavanaps project or thi
 
 ## How-to
 
-**Before running this app you should turn off automatic updates installation (not a requirement)**. This could be done via Group Policy Object Editor MMC snap-in or via the Patchfluent UI by enabling the option **Automatic updates**
+**Before running this app you should turn off automatic updates installation (not a requirement)**. This could be done via Group Policy Object Editor MMC snap-in or via the Patchfluent UI by setting the option **Automatic updates off**
 
 
 ## Download
