@@ -6,7 +6,7 @@
   <br>
 </h1>
 
-<h3 align="center">💧 Customize Windows 10 Updates</h3>
+<h3 align="center">💧 Redesigned Windows 10 Update page which gives you more control over the updates</h3>
 
 <p align="center">
 <a href="https://github.com/builtbybel/patchlady/releases/latest" target="_blank">
